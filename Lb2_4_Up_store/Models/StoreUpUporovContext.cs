@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Lb2_4_Up_store.Models;
+﻿using Lb2_4_Up_store.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Lb2_4_Up_store;
@@ -108,7 +106,7 @@ public partial class StoreUpUporovContext : DbContext
                 .HasForeignKey(d => d.IdStatuses)
                 .HasConstraintName("orders_id_statuses_fkey");
 
-            entity.HasOne(d => d.IdUserNavigation).WithMany(p => p.Orders)
+            entity.HasOne(d => d.User).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.IdUser)
                 .HasConstraintName("orders_id_user_fkey");
         });
@@ -150,7 +148,7 @@ public partial class StoreUpUporovContext : DbContext
                 .HasForeignKey(d => d.IdSupplier)
                 .HasConstraintName("products_id_supplier_fkey");
 
-            entity.HasOne(d => d.IdTypeNavigation).WithMany(p => p.Products)
+            entity.HasOne(d => d.ProductType).WithMany(p => p.Products)
                 .HasForeignKey(d => d.IdType)
                 .HasConstraintName("products_id_type_fkey");
         });

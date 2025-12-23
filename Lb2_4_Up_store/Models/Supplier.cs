@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Lb2_4_Up_store.Models;
+﻿namespace Lb2_4_Up_store.Models;
 
 public partial class Supplier
 {
