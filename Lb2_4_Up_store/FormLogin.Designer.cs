@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLogin));
             pbLogo = new PictureBox();
             pnMain = new Panel();
-            this.btnGuest = new Button();
+            btnGuest = new Button();
             btnLogin = new Button();
             txtPassword = new TextBox();
             txtLogin = new TextBox();
@@ -55,7 +55,7 @@
             // pnMain
             // 
             pnMain.Anchor = AnchorStyles.None;
-            pnMain.Controls.Add(this.btnGuest);
+            pnMain.Controls.Add(btnGuest);
             pnMain.Controls.Add(btnLogin);
             pnMain.Controls.Add(txtPassword);
             pnMain.Controls.Add(txtLogin);
@@ -68,15 +68,16 @@
             // 
             // btnGuest
             // 
-            this.btnGuest.BackColor = Color.Chartreuse;
-            this.btnGuest.FlatAppearance.BorderSize = 0;
-            this.btnGuest.FlatStyle = FlatStyle.Flat;
-            this.btnGuest.Location = new Point(89, 165);
-            this.btnGuest.Name = "btnGuest";
-            this.btnGuest.Size = new Size(150, 30);
-            this.btnGuest.TabIndex = 5;
-            this.btnGuest.Text = "Войти как гость";
-            this.btnGuest.UseVisualStyleBackColor = false;
+            btnGuest.BackColor = Color.Chartreuse;
+            btnGuest.FlatAppearance.BorderSize = 0;
+            btnGuest.FlatStyle = FlatStyle.Flat;
+            btnGuest.Location = new Point(89, 165);
+            btnGuest.Name = "btnGuest";
+            btnGuest.Size = new Size(150, 30);
+            btnGuest.TabIndex = 5;
+            btnGuest.Text = "Войти как гость";
+            btnGuest.UseVisualStyleBackColor = false;
+            btnGuest.Click += BtnGuest_Click;
             // 
             // btnLogin
             // 
@@ -89,6 +90,7 @@
             btnLogin.TabIndex = 4;
             btnLogin.Text = "Войти";
             btnLogin.UseVisualStyleBackColor = false;
+            btnLogin.Click += BtnLogin_Click;
             // 
             // txtPassword
             // 
@@ -137,6 +139,7 @@
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "FormLogin";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Вход в систему";
             ((System.ComponentModel.ISupportInitialize)pbLogo).EndInit();
             pnMain.ResumeLayout(false);

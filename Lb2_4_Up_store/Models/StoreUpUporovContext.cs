@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using Lb2_4_Up_store.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Lb2_4_Up_store.Models;
+namespace Lb2_4_Up_store;
 
 public partial class StoreUpUporovContext : DbContext
 {
