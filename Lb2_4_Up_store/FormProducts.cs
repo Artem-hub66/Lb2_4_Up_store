@@ -22,7 +22,7 @@ namespace Lb2_4_Up_store
             var colInfo = new DataGridViewTextBoxColumn();
             colInfo.Name = "colInfo";
             colInfo.FillWeight = 60;
-            colInfo.DefaultCellStyle.WrapMode=DataGridViewTriState.True;
+            colInfo.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
 
             var colDiscount = new DataGridViewTextBoxColumn();
             colDiscount.Name = "colDiscount";
@@ -65,21 +65,53 @@ namespace Lb2_4_Up_store
                         row.Cells["colPhoto"].Value = LoadProductImage(product.PhotoUrl);
 
                         row.Cells["colInfo"].Value = FormatProductInfo(product);
+
+                        row.Cells["colDiscount"].Value = $"{product.Discount}%";
+                        row.Cells["colDiscount"].Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+                        ApplyRowStyles(row, product);
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка загрузки: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error );
+                MessageBox.Show($"Ошибка загрузки: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
+
+        }
+
+        private void ApplyRowStyles(DataGridViewRow row, Product product)
+        {
+            if (product.Discount > 15)
+            {
+                row.DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#2E8B57");
+                row.DefaultCellStyle.ForeColor = Color.White;
+            }
+
+            if (product.CointInStock <= 0)
+            {
+                row.DefaultCellStyle.BackColor = Color.LightBlue;
+                if (product.Discount <= 15)
+                {
+                    row.DefaultCellStyle.ForeColor = Color.Black;
+                }
+            }
+
+            if (product.Discount > 0)
+            {
+                row.Cells["colDiscount"].Style.ForeColor = Color.Red;
+                row.Cells["colDiscount"].Style.Font = new Font(
+                    "Times New Roman",
+                    12,
+                    FontStyle.Bold);
+            }
         }
 
         private string FormatProductInfo(Product product)
         {
             string priceText;
 
-            if(product.Discount > 0)
+            if (product.Discount > 0)
             {
                 decimal finalPrice = product.Price * (100 - product.Discount) / 100;
                 priceText = $"Цена: {product.Price:C} -> {finalPrice:C}";
@@ -94,17 +126,28 @@ namespace Lb2_4_Up_store
                 $"Поставщик: {product.Supplier.SupplierName}" + Environment.NewLine +
                 $"Цена: {priceText}" + Environment.NewLine +
                 $"Еденица измерения: {product.Measure.MeasureName}" + Environment.NewLine +
-                $"Количество на складе: {product.CointInStock}" + Environment.NewLine; 
+                $"Количество на складе: {product.CointInStock}" + Environment.NewLine;
         }
 
         private Image LoadProductImage(string photoUrl)
         {
-            if(!String.IsNullOrEmpty(photoUrl) && System.IO.File.Exists(photoUrl))
+            if (!String.IsNullOrEmpty(photoUrl) && System.IO.File.Exists(photoUrl))
             {
                 return Image.FromFile(photoUrl);
             }
 
             return Resources.picture;
+        }
+
+        private void BtnLogut_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
         }
     }
 }

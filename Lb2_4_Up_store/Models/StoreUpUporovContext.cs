@@ -98,11 +98,11 @@ public partial class StoreUpUporovContext : DbContext
             entity.Property(e => e.IdUser).HasColumnName("id_user");
             entity.Property(e => e.OrderDate).HasColumnName("order_date");
 
-            entity.HasOne(d => d.IdDeliveryPointNavigation).WithMany(p => p.Orders)
+            entity.HasOne(d => d.DeliveryPoint).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.IdDeliveryPoint)
                 .HasConstraintName("orders_id_delivery_point_fkey");
 
-            entity.HasOne(d => d.IdStatusesNavigation).WithMany(p => p.Orders)
+            entity.HasOne(d => d.Status).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.IdStatuses)
                 .HasConstraintName("orders_id_statuses_fkey");
 
@@ -132,19 +132,19 @@ public partial class StoreUpUporovContext : DbContext
                 .HasColumnType("money")
                 .HasColumnName("price");
 
-            entity.HasOne(d => d.IdCategoryNavigation).WithMany(p => p.Products)
+            entity.HasOne(d => d.Category).WithMany(p => p.Products)
                 .HasForeignKey(d => d.IdCategory)
                 .HasConstraintName("products_id_category_fkey");
 
-            entity.HasOne(d => d.IdManufacturerNavigation).WithMany(p => p.Products)
+            entity.HasOne(d => d.Manufacturer).WithMany(p => p.Products)
                 .HasForeignKey(d => d.IdManufacturer)
                 .HasConstraintName("products_id_manufacturer_fkey");
 
-            entity.HasOne(d => d.IdMeasureNavigation).WithMany(p => p.Products)
+            entity.HasOne(d => d.Measure).WithMany(p => p.Products)
                 .HasForeignKey(d => d.IdMeasure)
                 .HasConstraintName("products_id_measure_fkey");
 
-            entity.HasOne(d => d.IdSupplierNavigation).WithMany(p => p.Products)
+            entity.HasOne(d => d.Supplier).WithMany(p => p.Products)
                 .HasForeignKey(d => d.IdSupplier)
                 .HasConstraintName("products_id_supplier_fkey");
 
@@ -174,11 +174,11 @@ public partial class StoreUpUporovContext : DbContext
             entity.Property(e => e.IdProduct).HasColumnName("id_product");
             entity.Property(e => e.Quantity).HasColumnName("quantity");
 
-            entity.HasOne(d => d.IdOrderNavigation).WithMany(p => p.ProductsOrders)
+            entity.HasOne(d => d.Order).WithMany(p => p.ProductsOrders)
                 .HasForeignKey(d => d.IdOrder)
                 .HasConstraintName("products_orders_id_order_fkey");
 
-            entity.HasOne(d => d.IdProductNavigation).WithMany(p => p.ProductsOrders)
+            entity.HasOne(d => d.Product).WithMany(p => p.ProductsOrders)
                 .HasForeignKey(d => d.IdProduct)
                 .HasConstraintName("products_orders_id_product_fkey");
         });
@@ -227,7 +227,7 @@ public partial class StoreUpUporovContext : DbContext
             entity.Property(e => e.MiddleName).HasColumnName("middle_name");
             entity.Property(e => e.Pass).HasColumnName("pass");
 
-            entity.HasOne(d => d.IdRoleNavigation).WithMany(p => p.Users)
+            entity.HasOne(d => d.Role).WithMany(p => p.Users)
                 .HasForeignKey(d => d.IdRole)
                 .HasConstraintName("users_id_role_fkey");
         });
