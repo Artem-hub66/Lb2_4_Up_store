@@ -48,10 +48,12 @@ namespace Lb2_4_Up_store
             {
                 using (var db = new StoreUpUporovContext())
                 {
-                    var products = db.Products.Include(i => i.Category)
+                    var products = db.Products
+                        .Include(i => i.Category)
                         .Include(i => i.Manufacturer)
                         .Include(i => i.Supplier)
                         .Include(i => i.Measure)
+                        .Include(i =>i.ProductType)
                         .ToList();
 
                     dgvProducts.SuspendLayout();
@@ -71,6 +73,9 @@ namespace Lb2_4_Up_store
 
                         ApplyRowStyles(row, product);
                     }
+
+                    dgvProducts.ResumeLayout();
+                    dgvProducts.AutoResizeRows(DataGridViewAutoSizeRowsMode.AllCells);
                 }
             }
             catch (Exception ex)
