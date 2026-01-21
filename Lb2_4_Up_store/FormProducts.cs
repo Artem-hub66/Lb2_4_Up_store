@@ -82,7 +82,6 @@ namespace Lb2_4_Up_store
             {
                 MessageBox.Show($"Ошибка загрузки: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
 
         private void ApplyRowStyles(DataGridViewRow row, Product product)

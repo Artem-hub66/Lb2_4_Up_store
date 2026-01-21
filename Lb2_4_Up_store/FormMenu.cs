@@ -1,6 +1,4 @@
 ﻿using Lb2_4_Up_store.Models;
-using Lb2_4_Up_store.Properties;
-using Microsoft.EntityFrameworkCore;
 
 namespace Lb2_4_Up_store
 {
@@ -27,11 +25,18 @@ namespace Lb2_4_Up_store
 
         private void BtnOrder_Click(object sender, EventArgs e)
         {
-            FormProducts formProducts = new FormProducts(
-                formProducts.CurrentUser,
-                formProducts.IsGuest);
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+            FormOrders formOrders = new FormOrders(CurrentUser, IsGuest);
+            this.Hide();
+            formOrders.ShowDialog();
+            this.Show();
+        }
+
+        private void BtnProducts_Click(object sender, EventArgs e)
+        {
+            FormProducts formProducts = new FormProducts(CurrentUser, IsGuest);
+            this.Hide(); 
+            formProducts.ShowDialog(); 
+            this.Show();
         }
     }
 }

@@ -88,6 +88,7 @@
             btnProducts.TabIndex = 2;
             btnProducts.Text = "Товары";
             btnProducts.UseVisualStyleBackColor = true;
+            btnProducts.Click += BtnProducts_Click;
             // 
             // FormMenu
             // 
