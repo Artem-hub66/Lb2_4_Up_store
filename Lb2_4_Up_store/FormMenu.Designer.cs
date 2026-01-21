@@ -31,6 +31,8 @@
             panelTopMenu = new Panel();
             lblUserNameMenu = new Label();
             btnLogutMenu = new Button();
+            btnOrder = new Button();
+            btnProducts = new Button();
             panelTopMenu.SuspendLayout();
             SuspendLayout();
             // 
@@ -68,12 +70,33 @@
             btnLogutMenu.UseVisualStyleBackColor = false;
             btnLogutMenu.Click += BtnLogutMenu_Click;
             // 
+            // btnOrder
+            // 
+            btnOrder.Location = new Point(10, 218);
+            btnOrder.Name = "btnOrder";
+            btnOrder.Size = new Size(964, 40);
+            btnOrder.TabIndex = 1;
+            btnOrder.Text = "Заказы";
+            btnOrder.UseVisualStyleBackColor = true;
+            btnOrder.Click += BtnOrder_Click;
+            // 
+            // btnProducts
+            // 
+            btnProducts.Location = new Point(10, 299);
+            btnProducts.Name = "btnProducts";
+            btnProducts.Size = new Size(964, 40);
+            btnProducts.TabIndex = 2;
+            btnProducts.Text = "Товары";
+            btnProducts.UseVisualStyleBackColor = true;
+            // 
             // FormMenu
             // 
             AutoScaleDimensions = new SizeF(9F, 19F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(984, 661);
+            Controls.Add(btnProducts);
+            Controls.Add(btnOrder);
             Controls.Add(panelTopMenu);
             Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
             Margin = new Padding(4);
@@ -91,5 +114,7 @@
         private Panel panelTopMenu;
         private Button btnLogutMenu;
         private Label lblUserNameMenu;
+        private Button btnOrder;
+        private Button btnProducts;
     }
 }

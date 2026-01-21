@@ -12,11 +12,11 @@ namespace Lb2_4_Up_store
                 {
                     if(formLogin.ShowDialog() == DialogResult.OK)
                     {
-                        using(var formProducts = new FormProducts(
+                        using(var formMenu = new FormMenu(
                             formLogin.CurrentUser,
                             formLogin.IsGuest))
                         {
-                            if(formProducts.ShowDialog() == DialogResult.Cancel)
+                            if(formMenu.ShowDialog() == DialogResult.Cancel)
                             {
                                 continue;
                             }
