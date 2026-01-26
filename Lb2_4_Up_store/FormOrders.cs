@@ -19,7 +19,7 @@ namespace Lb2_4_Up_store
 
             var colDate = new DataGridViewTextBoxColumn();
             colDate.Name = "colDate";
-            colDate.FillWeight = 10;
+            colDate.FillWeight = 20;
             colDate.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
             dgvOrders.Columns.AddRange(
@@ -31,9 +31,11 @@ namespace Lb2_4_Up_store
             IsGuest = guest;
 
             lblUserNameOrder.Text = IsGuest ? "Гость" : CurrentUser.FullName;
+
+            LoadOrder();
         }
 
-        private void LoadProducts()
+        private void LoadOrder()
         {
             try
             {
@@ -56,9 +58,8 @@ namespace Lb2_4_Up_store
 
                         row.Cells["colInfo"].Value = FormatOrdersInfo(order);
 
-                        //row.Cells["colDate"].Value = FormatOrdersDate(order);
-
-                        //ApplyRowStyles(row, order);
+                        row.Cells["colDate"].Value = $"{order.DeliveryDate}";
+                        row.Cells["colDate"].Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
                     }
 
                     dgvOrders.ResumeLayout();
@@ -72,15 +73,18 @@ namespace Lb2_4_Up_store
 
         }
         private string FormatOrdersInfo(Order order)
-        {            
-            var arts = order.ProductsOrders.FirstOrDefault().Product.Art;
+        {
+            string arts = "";
+            foreach (var productOrder in order.ProductsOrders.ToList())
+            {
+                arts=arts+" "+ productOrder.Product.Art;
+            }
 
-            return $"Артикул: {order.ProductsOrders.}" + Environment.NewLine +
-                $"Статус заказа: {order.}" + Environment.NewLine +
+            return $"Артикул: {arts}" + Environment.NewLine +
+                $"Статус заказа: {order.Status.StatusName}" + Environment.NewLine +
                 $"Адрес пункта выдачи: {order.DeliveryPoint.DeliveryAddress}" + Environment.NewLine +
                 $"Дата заказа: {order.OrderDate}" + Environment.NewLine;
         }
-
         private void BtnLogutOrder_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
