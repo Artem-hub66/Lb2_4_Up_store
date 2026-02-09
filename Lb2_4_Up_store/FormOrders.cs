@@ -44,7 +44,13 @@ namespace Lb2_4_Up_store
                     var orders = db.Orders
                         .Include(i => i.Status)
                         .Include(i => i.DeliveryPoint)
-                        .Include(i => i.ProductsOrders).ThenInclude(i=>i.Product)
+                        .Include(i => i.ProductsOrders)
+                            .ThenInclude(i => i.Product)
+                        .ToList()
+                        .Where(o => o.ProductsOrders != null &&
+                                   o.ProductsOrders.Any() &&
+                                   o.ProductsOrders.Any(po => po.Product != null &&
+                                                             !string.IsNullOrWhiteSpace(po.Product.Art)))
                         .ToList();
 
                     dgvOrders.SuspendLayout();
@@ -54,7 +60,6 @@ namespace Lb2_4_Up_store
                     {
                         int rowIndex = dgvOrders.Rows.Add();
                         var row = dgvOrders.Rows[rowIndex];
-
 
                         row.Cells["colInfo"].Value = FormatOrdersInfo(order);
 
@@ -68,10 +73,11 @@ namespace Lb2_4_Up_store
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка загрузки: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Ошибка загрузки: {ex.Message}", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
+
         private string FormatOrdersInfo(Order order)
         {
             string arts = "";

@@ -38,6 +38,7 @@
             // 
             // panelTopMenu
             // 
+            panelTopMenu.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             panelTopMenu.Controls.Add(lblUserNameMenu);
             panelTopMenu.Controls.Add(btnLogutMenu);
             panelTopMenu.Location = new Point(10, 10);
@@ -72,6 +73,7 @@
             // 
             // btnOrder
             // 
+            btnOrder.Anchor = AnchorStyles.None;
             btnOrder.Location = new Point(10, 218);
             btnOrder.Name = "btnOrder";
             btnOrder.Size = new Size(964, 40);
@@ -82,6 +84,7 @@
             // 
             // btnProducts
             // 
+            btnProducts.Anchor = AnchorStyles.None;
             btnProducts.Location = new Point(10, 299);
             btnProducts.Name = "btnProducts";
             btnProducts.Size = new Size(964, 40);

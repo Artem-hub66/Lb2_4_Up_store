@@ -135,12 +135,46 @@ namespace Lb2_4_Up_store
 
         private Image LoadProductImage(string photoUrl)
         {
-            if (!String.IsNullOrEmpty(photoUrl) && System.IO.File.Exists(photoUrl))
+            try
             {
-                return Image.FromFile(photoUrl);
-            }
+                // Проверяем, содержит ли photoUrl имя файла из Resources 
+                if (!String.IsNullOrWhiteSpace(photoUrl))
+                {
+                    string fileName = System.IO.Path.GetFileNameWithoutExtension(photoUrl);
 
-            return Resources.picture;
+                    var resourceProperty = Resources.ResourceManager.GetObject(fileName) as Image;
+                    if (resourceProperty != null)
+                    {
+                        return resourceProperty;
+                    }
+                }
+
+                if (!String.IsNullOrWhiteSpace(photoUrl))
+                {
+                    if (int.TryParse(photoUrl.Replace("img", ""), out int imgNumber))
+                    {
+                        return imgNumber switch
+                        {
+                            1 => Resources.img1,
+                            2 => Resources.img2,
+                            3 => Resources.img3,
+                            4 => Resources.img4,
+                            5 => Resources.img5,
+                            6 => Resources.img6,
+                            7 => Resources.img7,
+                            8 => Resources.img8,
+                            9 => Resources.img9,
+                            10 => Resources.img10,
+                            _ => Resources.picture 
+                        };
+                    }
+                }
+                return Resources.picture;
+            }
+            catch (Exception ex)
+            {
+                return Resources.picture;
+            }
         }
 
         private void BtnLogut_Click(object sender, EventArgs e)
